@@ -20,7 +20,7 @@ jobs:
       run: |
         az ml job create --file src/dev_job.yml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews" --stream
   train-prd:
-    needs: dev
+    needs: train-dev
     environment: prod
     runs-on: ubuntu-latest
     steps:
