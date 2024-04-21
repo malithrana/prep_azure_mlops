@@ -16,4 +16,4 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: deploy diabetic model
       run: |
-        az ml online-deployment create --file src/deploy_job.yaml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews"
+        az ml online-deployment create --file src/deploy_job.yml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews"
