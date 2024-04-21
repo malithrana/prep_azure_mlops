@@ -5,10 +5,15 @@ on:
 
 jobs:
   deploy:
+    environment: prod
     runs-on: ubuntu-latest
     steps:
     - name: Install az ml extension
       run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: deploy diabetic model
       run: |
         az ml online-deployment create --file src/deploy_job.yaml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews"
