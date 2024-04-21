@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: mlflow-deployment
+endpoint_name: diabetic-endpoint
+model:
+  name: int-prep-model  # Registered model name
+  version: 1                 # Registered model version
+instance_type: Standard_F2s_v2
+instance_count: 1

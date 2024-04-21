@@ -1,0 +1,12 @@
+name: Deploy model
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy diabetic model
+      run: |
+        az ml online-deployment create --file src/deploy_job.yaml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews"
