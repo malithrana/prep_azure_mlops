@@ -17,4 +17,4 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
       run: | 
-        az ml job create --file ../src/job.yml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews"
+        az ml job create --file ../../src/job.yml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews"
