@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  train:
-    environment: dev
+  train-prd:
+    needs: dev
+    environment: prod
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
@@ -18,4 +19,20 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
       run: |
-        az ml job create --file src/job.yml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews"
+        az ml job create --file src/prod_job.yml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews" --stream
+        
+  train-dev:
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Submit job
+      run: |
+        az ml job create --file src/dev_job.yml --workspace-name "wkspace_int_preps" --resource-group "prep_interviews" --stream
